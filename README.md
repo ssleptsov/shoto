@@ -9,14 +9,10 @@ This extension using the same API and logic that you have in the workspace *Quic
 
 ## Usage
 
- 0. Install from store if it's available and skip to step 5.
- 1. Download ZIP repository and unzip it.
- 2. Open extensions page, for example chrome://extensions/
- 3. Turn on Developer mode.
- 4. Load unpacked extension.
- 5. Open to any notion page.
- 6. Click extentsion icon, this will save id of current workspace within that will it search.
- 7. Now in browser URL bar just type `/` and press `space` or `tab` to start search.
+ 0. Install from store https://chrome.google.com/webstore/detail/shoto/lnnlchbbenkmimmhdfnljleabhajfebl
+ 1. Open to any notion page.
+ 2. Click the extension icon, it will save workspace id within that will it search.
+ 3. Now in browser URL bar just type `/` and press `space` or `tab` to start search.
 
 ### Multiple workspace
 
