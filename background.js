@@ -76,7 +76,7 @@ chrome.omnibox.onInputChanged.addListener(
         filters: {
           isDeletedOnly: false,
           excludeTemplates: false,
-          isNavigableOnly: false,
+          isNavigableOnly: true,
           requireEditPermissions: false,
           ancestors: [],
           createdBy: [],
