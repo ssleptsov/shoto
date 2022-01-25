@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Shoto - Options</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+
+    <div class="setting">
+      <p id="notActive"  style="display: none;">
+        <span style="font-weight: 600;">Not activated</span> <br>
+        <br>
+        To activate extenstion click it's icon on any notion page. <br>
+        It will locally save only notion workspace id for search request.
+      </p>
+      <p id="active" style="display: none;">
+        Extenstion Activated
+      </p>
+    </div>
+
+    <div class="setting">
+      <div class="switch">
+        <input id="openInNewTab" type="checkbox" class="switch-input" />
+        <label for="openInNewTab" class="switch-label"></label>
+      </div>
+      <span>Open result in new tab</span>
+    </div>
+
+    <div class="setting">
+      <div class="switch">
+        <input id="titleOnly" type="checkbox" class="switch-input" />
+        <label for="titleOnly" class="switch-label"></label>
+      </div>
+      <span>Search title only</span>
+    </div>
+    
+   
+
+
+
+
+  <button id="save">Save</button>
+  <div id="status"></div>
+
+  <script src="options.js"></script>
+</body>
+
+</html>

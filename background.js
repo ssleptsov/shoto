@@ -19,10 +19,24 @@ const STRANGE_NOTION_TAG = "gzkNfoUU";
  * Notion workspace ID, based on cookie ajs_group_id. Its' called space id in search term.
  */
 let SPACE_ID;
+/**
+ * Search title only, used for large notions
+ */
+let TITLE_ONLY = false;
+/**
+ * Open in same tab or new flag
+ */
+let OPEN_IN_NEW_TAB = true;
 
-chrome.storage.local.get(["SPACE_ID"], (data) => {
+chrome.storage.local.get(["SPACE_ID", "TITLE_ONLY", "OPEN_IN_NEW_TAB"], (data) => {
   if (data && data.SPACE_ID) {
     SPACE_ID = data.SPACE_ID;
+  }
+  if (data && data.TITLE_ONLY) {
+    TITLE_ONLY = data.TITLE_ONLY;
+  }
+  if (data && data.OPEN_IN_NEW_TAB) {
+    OPEN_IN_NEW_TAB = data.OPEN_IN_NEW_TAB;
   }
 });
 
@@ -38,11 +52,22 @@ chrome.browserAction.onClicked.addListener((tab) => {
 /**
  * Saving workspace id for future use
  */
-chrome.runtime.onMessage.addListener((request) => {
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === "ADD_SPACE_ID") {
     SPACE_ID = request.data.spaceId;
     chrome.storage.local.set({ SPACE_ID: request.data.spaceId });
+  } else if (request.type === "SETTINGS"){
+    TITLE_ONLY = request.data.TITLE_ONLY;
+    OPEN_IN_NEW_TAB = request.data.OPEN_IN_NEW_TAB;
   }
+  sendResponse({status: true});
+  return true; 
+});
+
+chrome.runtime.onInstalled.addListener(function (object) {
+  chrome.tabs.create({url: `chrome-extension://${chrome.runtime.id}/options.html`}, function (tab) {
+      // console.log("options page opened");
+  });
 });
 
 /**
@@ -64,6 +89,7 @@ chrome.omnibox.onInputChanged.addListener(
       suggest([]);
       return;
     }
+    
 
     try {
       const spaceUUID = idToUuid(SPACE_ID);
@@ -76,7 +102,7 @@ chrome.omnibox.onInputChanged.addListener(
         filters: {
           isDeletedOnly: false,
           excludeTemplates: false,
-          isNavigableOnly: false,
+          isNavigableOnly: TITLE_ONLY,
           requireEditPermissions: false,
           ancestors: [],
           createdBy: [],
@@ -147,7 +173,11 @@ chrome.omnibox.onInputChanged.addListener(
  */
 chrome.omnibox.onInputEntered.addListener((url) => {
   if (url.startsWith(NOTION_HOST)){
-    chrome.tabs.create({ url });
+    if (OPEN_IN_NEW_TAB){
+      chrome.tabs.create({ url });
+      return;
+    }
+    chrome.tabs.update(undefined, { url });
   }
 });
 

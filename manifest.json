@@ -1,7 +1,7 @@
 {
     "name": "Shoto",
     "description": "Notion search from URL bar",
-    "version": "1.0",
+    "version": "1.1.0",
     "background": {
         "scripts": [
             "background.js"
@@ -11,6 +11,7 @@
     "omnibox": {
         "keyword": "/"
     },
+    "options_page": "options.html",
     "manifest_version": 2,
     "browser_action": {
         "default_icon": {

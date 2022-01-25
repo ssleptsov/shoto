@@ -3,7 +3,7 @@ let spaceId = localStorage.getItem('ajs_group_id');
 try {
   spaceId = JSON.parse(spaceId);
   if (!spaceId){
-    alert('Can\'t get Notion workspace id');
+    alert('Can\'t get Notion workspace id. Please navigation to any www.notion.so page and click extension icon there');
   }
 } catch (err) {
   alert('Error in getting Notion workspace id');
