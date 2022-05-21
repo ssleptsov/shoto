@@ -79,7 +79,7 @@ chrome.omnibox.onInputChanged.addListener(
       suggest([
         {
           content: NOTION_HOST,
-          description: "To activate extenstion click it's icon on any notion page, it will save its workspace id for search",
+          description: "To activate extension click its icon on any Notion page. It will save its workspace id for search.",
         },
       ]);
       return;
@@ -163,7 +163,7 @@ chrome.omnibox.onInputChanged.addListener(
       suggest(result);
     } catch (err) {
       console.error(err);
-      suggest([{ content: "", description: "Unknow Error. Please check console for details."}]);
+      suggest([{ content: "", description: "Unknown Error. Please check console for details."}]);
     }
   }, DEBOUNCE_TIME)
 );
@@ -182,7 +182,7 @@ chrome.omnibox.onInputEntered.addListener((url) => {
 });
 
 /**
- * Notion use both id and uuid format. This function help with convert id to uuid
+ * Notion use both id and uuid format. This function help with converting id to uuid.
  */
 function idToUuid(path) {
   return `${path.substr(0, 8)}-${path.substr(8, 4)}-${path.substr(12, 4)}-${path.substr(16, 4)}-${path.substr(20)}`;
